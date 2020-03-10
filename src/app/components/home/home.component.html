@@ -1,0 +1,84 @@
+<div class="container bg-light input__box">
+    Enter the number of cities to get weather from:
+    <form class="form-inline">
+        <div class="form-group mb-2">
+          <label class="sr-only">Number of cities:</label>
+          <input type="number" class="form-control" id="number" value="1" min="1" max="50"
+          name="numberOfLocations" [(ngModel)]="numberOfLocations">
+        </div>
+        <button type="submit" class="btn btn-success mb-2" (click)="getRandomLocations(numberOfLocations)">Go!</button>
+      </form>
+</div>
+
+
+
+<div class="container map__and__choices">
+    <div class="row">
+
+        <!-- SELECTED LOCATION -->
+        <div class="col-lg-6 col-md-7 col-sm-12 bg-light selected__location rounded" *ngIf="isLocationSelected">
+            <div class="container">
+                <div class="row">
+                    <mgl-map
+                        [style]="'mapbox://styles/mapbox/streets-v9'"
+                        [zoom]="[15]"
+                        [center]="[selectedLocation.coord.lon, selectedLocation.coord.lat]">
+                        
+                        <mgl-marker
+                            [lngLat]="[selectedLocation.coord.lon, selectedLocation.coord.lat]"
+                        >
+                        </mgl-marker>
+                    </mgl-map>
+                </div>
+                <div class="container weather__data">
+                    <div>
+                        <!-- Location Name -->
+                        <div *ngIf="selectedLocation.name == ''">
+                            <h5>Unnamed Location</h5>
+                            <hr>
+                        </div>
+                        <div *ngIf="selectedLocation.name != ''">
+                            <h4>{{selectedLocation.name}}</h4>
+                        </div>
+
+                        <!-- Current Conditions -->
+                        <h6>Current Conditions: {{selectedLocation.weather[0].main}}</h6>
+
+                        <!-- Temp -->
+                        <hr>
+                        <h6>Temperature: {{selectedLocation.main.temp}} °F</h6>
+                        <p class="wx__secondary">low: {{selectedLocation.main.temp_min}} °F / high: {{selectedLocation.main.temp_max}} °F</p>
+                        <p class="wx__secondary">Feels like: {{selectedLocation.main.feels_like}}</p>
+                        
+                        <!-- Winds -->
+                        <hr>
+                        <h6>Wind Speed: {{selectedLocation.wind.speed}} mph</h6>
+                        <h6>Wind Direction: {{selectedLocation.wind.deg}} degrees</h6>
+
+                    </div>
+                </div>
+            
+            </div> 
+        </div>
+
+        <!-- LIST OF LOCATIONS -->
+        <div class="col-lg-6 col-md-5 col-sm12">
+            <div class="container location__list" *ngIf="selected">
+                <div class="row location__card rounded shadow-sm" *ngFor="let wx of allWeather" (click)="selectedWx(wx)">
+                    <div>
+                        <div *ngIf="wx.name == ''">
+                            <h3>Unnamed Location</h3>
+                        </div>
+                        <div *ngIf="wx.name != ''">
+                            <h3>{{wx.name}}</h3>
+                         </div>
+                         <p>
+                            Latitude: {{wx.coord.lat}}, Longitude: {{wx.coord.lon}}
+                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

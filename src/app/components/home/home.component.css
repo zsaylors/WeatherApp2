@@ -1,0 +1,52 @@
+body {
+    max-height: 100vh;
+}
+
+.input__box, .location__list, .map__and__choices {
+    margin-top: 30px;
+    padding: 10px;
+}
+
+/************
+   SELECTED WEATHER DATA
+************/
+.selected__location {
+    padding: 0;
+    border-radius: 30px;
+}
+
+.wx__secondary {
+    padding: 0;
+    margin: 0;
+    font-size: 70%;
+}
+
+/************
+    LOCATION LIST
+************/
+.weather__data {
+    margin: 20px 0 20px 0;
+}
+
+.location__list {
+    overflow-y: scroll;
+    height: 70vh;
+    padding: 0 20px 0 20px;
+}
+
+.location__card {
+    padding: 20px;
+    margin: 10px 0px 10px 0; 
+}
+
+.location__card:hover {
+    background-color: aliceblue;
+}
+
+/************
+    MAP
+*************/
+mgl-map {
+    height: 300px;
+    width: 100%;
+  }
