@@ -20,7 +20,7 @@
 
 
 ## How to run
-Download from GitHub, cd to the directory, and follow these steps:
+Download from GitHub, cd to the directory, in the command line type "npm install," and follow these steps:
 
 ### Development server
 
