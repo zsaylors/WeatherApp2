@@ -8,6 +8,7 @@ import { Weather } from '../models/weather';
   providedIn: 'root'
 })
 export class WeatherDataService {
+  weather: Weather;
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +25,17 @@ export class WeatherDataService {
 
   // Gets weather data from open weathermap
   getWeatherData(lat, lon) {
-    return this.http.get<Weather>('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=de10300ebff83ff66eb7a188c336b7b5').pipe(
+    return this.http.get<Weather>('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=de10300ebff83ff66eb7a188c336b7b5', {responseType: 'json'}).pipe(
+      // pass => {
+      //   this.weather.name = pass.name;
+      //   this.weather.description = pass.weather[0].main;
+      //   this.weather.temp = pass.main.temp;
+      //   this.weather.temp_min = pass.main.temp_min;
+      //   this.weather.temp_max = pass.main.temp_max;
+      //   this.weather.feels_like = pass.main.feels_like;
+      //   this.weather.windSpeed = pass.wind.speed;
+      //   this.weather.windDeg = pass.wind.deg;
+      // },
       catchError((err: any) => {
         return throwError('Error obtaining weather data');
       })

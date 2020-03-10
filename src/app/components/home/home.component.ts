@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   allWeather: Weather[] = [];
   newWx: Weather;
   selected: boolean = false;
-  selectedLocation: any;
+  selectedLocation: Weather;
   isLocationSelected: boolean = false;
 
   constructor(private svc: WeatherDataService) { }
@@ -44,11 +44,12 @@ export class HomeComponent implements OnInit {
   getWeather() {
     for(let i = 0; i < this.lat.length - 1; i++) {
       this.svc.getWeatherData(this.lat[i], this.long[i]).subscribe(
-        data => { console.log(data),
-          this.newWx = data
-          this.allWeather.push(this.newWx)
+        data => {
+          this.newWx = data;
+          this.allWeather.push(this.newWx);
           this.isLocationSelected = true;
           this.selectedLocation = this.allWeather[0];
+          console.log(this.selectedLocation)
         },
         error => { console.error(error) }
       );
