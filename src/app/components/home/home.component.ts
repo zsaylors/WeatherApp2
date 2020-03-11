@@ -12,10 +12,10 @@ export class HomeComponent implements OnInit {
   numberOfLocations: number = 1;
   lat: String[];
   long: String[];
-  allWeather: Weather[] = [];
-  newWx: Weather;
+  allWeather: any[] = [];
+  newWx: any;
   selected: boolean = false;
-  selectedLocation: Weather;
+  selectedLocation: any;
   isLocationSelected: boolean = false;
 
   constructor(private svc: WeatherDataService) { }
